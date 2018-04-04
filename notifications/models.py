@@ -279,7 +279,7 @@ def notify_handler(verb, **kwargs):
         newnotify = Notification(
             recipient=recipient,
             actor_content_type=ContentType.objects.get_for_model(actor),
-            actor_object_id=actor.pk,
+            actor_object_id=actor.id.id,
             verb=text_type(verb),
             public=public,
             description=description,
@@ -290,7 +290,7 @@ def notify_handler(verb, **kwargs):
         # Set optional objects
         for obj, opt in optional_objs:
             if obj is not None:
-                setattr(newnotify, '%s_object_id' % opt, obj.pk)
+                setattr(newnotify, '%s_object_id' % opt, obj.id.id)
                 setattr(newnotify, '%s_content_type' % opt,
                         ContentType.objects.get_for_model(obj))
 
